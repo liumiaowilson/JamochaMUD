@@ -969,6 +969,8 @@ public class JMWriteRC {
         jMWriteEntry(JMConfig.LOGPATH, settings.getJMString(JMConfig.LOGPATH));
 
         jMWriteEntry(JMConfig.HISTORYLENGTH, settings.getJMString(JMConfig.HISTORYLENGTH));
+        
+        jMWriteEntry(JMConfig.COMMANDS_FILE, settings.getJMString(JMConfig.COMMANDS_FILE));
 
         // Now some user defined variables and definitions
         jMWriteVariables();

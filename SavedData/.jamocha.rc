@@ -10,10 +10,10 @@
 0
 
 [MainWindow]
-799
-317
-500
-400
+696
+169
+720
+672
 
 [DataBar]
 20
@@ -45,7 +45,7 @@ false
 0
  
 [AutoFocusInput]
-true
+
 
 [AutomaticLogging]
 
@@ -81,7 +81,7 @@ true
 
 
 [DividerLocation]
-280
+552
 
 [AutoLogPath]
 
