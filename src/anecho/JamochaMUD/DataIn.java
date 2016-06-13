@@ -25,7 +25,7 @@ import anecho.JamochaMUD.TinyFugue.JMTFKeys;
 import anecho.extranet.event.TelnetEvent;
 import java.awt.*;
 import java.awt.event.*;
-
+import java.util.ArrayList;
 import java.util.Vector;
 
 import anecho.extranet.event.TelnetEventListener;
@@ -122,6 +122,10 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
      * The down direction
      */
     public static final int DOWN = 1;
+    
+    private String lastProposal = null;
+    
+    private String initialInput = null;
 
     private final AbstractLogger logger;
 
@@ -301,6 +305,55 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
         }
 
     }
+    
+    private void doCompletion() {
+        if(this.useSwing) {
+            anecho.gui.JMSwingEntry entry = (anecho.gui.JMSwingEntry)dataText;
+            String text = entry.getText();
+            int pos = text.lastIndexOf(" ");
+            String prefix = null;
+            String suffix = null;
+            if(pos >= 0) {
+                prefix = text.substring(0, pos + 1);
+                suffix = text.substring(pos+1);
+            }
+            else {
+                prefix = "";
+                suffix = text;
+            }
+            
+            if(initialInput != null) {
+                suffix = initialInput;
+            }
+            
+            java.util.List<String> matched = new ArrayList<String>();
+            for(int i = 0; i < historyV.size(); i++) {
+                String item = (String) historyV.get(i);
+                if(item.startsWith(suffix)) {
+                    matched.add(item);
+                }
+            }
+            
+            if(matched.size() == 0) {
+            }
+            else if(matched.size() == 1) {
+                suffix = matched.get(0);
+            }
+            else {
+                for(String m : matched) {
+                    if(!m.equals(lastProposal)) {
+                        initialInput = suffix;
+                        suffix = m;
+                        lastProposal = m;
+                        break;
+                    }
+                }
+            }
+            
+            text = prefix + suffix;
+            entry.setText(text);
+        }
+    }
 
     /**
      * This method handles the processing of key events
@@ -322,6 +375,15 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
 
             MuckMain.getInstance().getMainFrame().requestFocus();
 
+        }
+        
+        if (arg == KeyEvent.VK_TAB) {
+            doCompletion();
+            
+            event.consume();
+        }
+        else {
+            initialInput = null;
         }
 
         if (event.isShiftDown()) {
