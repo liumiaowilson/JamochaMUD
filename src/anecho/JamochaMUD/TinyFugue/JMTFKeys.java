@@ -174,6 +174,9 @@ final public class JMTFKeys {
 
     /** Delete from the cursor to the end of the line */
     public static void dEOL() {
+        if(typeHere == null) {
+            typeHere = JMConfig.getInstance().getDataInVariable();
+        }
 
         final String wText = typeHere.getText();
         typeHere.setText(wText.substring(0, typeHere.getCaretPosition()));
@@ -181,40 +184,14 @@ final public class JMTFKeys {
     }
 
     /** Erase the entire line at the cursor's position */
-    protected static void eraseLine() {
-
-        // First, we'll locate the position of the cursor, and the
-        // beginning and end points of its line
-        final int cursor = typeHere.getCaretPosition();
-        final int row = rowNumber(cursor);
-        final int width = typeHere.getColumns();
-
-        // Determine the row end, to see if it the whole width of the area or not
-        int rowEnd = 0;
-        if ((row * width) > cursor) {
-            rowEnd = cursor;
-        } else {
-            rowEnd = row * width;
+    public static void eraseLine() {
+        if(typeHere == null) {
+            typeHere = JMConfig.getInstance().getDataInVariable();
         }
 
-        // Now, we can't really *erase* the line, so we just grab the test
-        // on either side of the line and make a new String
-        final StringBuffer rString = new StringBuffer(java.util.ResourceBundle.getBundle("anecho/JamochaMUD/TinyFugue/TinyFugueBundle").getString(""));
-        // String workString = DataIn.dataText.getText();
-        final String workString = typeHere.getText();
-
-        if ((row - 1) * width > 0) {
-            // Append any text before the 'selection'
-            rString.append(workString.substring(0, (row - 1) * width));
-        }
-
-        if (rowEnd < workString.length()) {
-            // Append any text left after the 'selection'
-            rString.append(workString.substring(rowEnd, workString.length()));
-        }
-
-        // Now we can set the new text in place of the old
-        typeHere.setText((rString.toString()).trim());
+        String text = typeHere.getText();
+        typeHere.setText(text.substring(typeHere.getCaretPosition()));
+        typeHere.setCaretPosition(0);
     }
 
     /** Erase the word proceeding the cursor */

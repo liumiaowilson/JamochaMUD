@@ -491,6 +491,12 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
 //            }
         }
 
+        if (event.isMetaDown()) {
+            if (arg == KeyEvent.VK_BACK_SPACE || arg == KeyEvent.VK_DELETE) {
+                JMTFKeys.eraseLine();
+                event.consume();
+            }
+        }
     }
 
     /**
