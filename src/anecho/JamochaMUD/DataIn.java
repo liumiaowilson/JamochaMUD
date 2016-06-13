@@ -29,6 +29,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Vector;
 
 import anecho.extranet.event.TelnetEventListener;
@@ -402,6 +403,8 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
                 }
             }
             
+            Collections.sort(matched);
+            
             if(matched.size() == 0) {
             }
             else if(matched.size() == 1) {
@@ -450,6 +453,7 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
         }
         else {
             initialInput = null;
+            lastProposal = 0;
         }
 
         if (event.isShiftDown()) {
