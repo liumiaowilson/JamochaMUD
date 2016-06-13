@@ -358,20 +358,46 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
             }
             
             java.util.List<String> matched = new ArrayList<String>();
-            for(int i = 0; i < historyV.size(); i++) {
-                String item = (String) historyV.get(i);
-                if(item.startsWith(suffix)) {
-                    if(!matched.contains(item)) {
-                        matched.add(item);
+            
+            if(pos >= 0) {
+                java.util.List<String> allWords = new ArrayList<String>();
+                for(int i = 0; i < historyV.size(); i++) {
+                    String item = (String) historyV.get(i);
+                    String [] parts = item.split(" ");
+                    if(parts.length > 1) {
+                        for(int j = 1; j < parts.length; j++) {
+                            if(!allWords.contains(parts[j])) {
+                                allWords.add(parts[j]);
+                            }
+                        }
+                    }
+                }
+                for(int i = 0; i < allWords.size(); i++) {
+                    String item = (String) allWords.get(i);
+                    if(item.startsWith(suffix)) {
+                        if(!matched.contains(item)) {
+                            matched.add(item);
+                        }
                     }
                 }
             }
-            
-            for(int i = 0; i < commandList.size(); i++) {
-                String item = (String) commandList.get(i);
-                if(item.startsWith(suffix)) {
-                    if(!matched.contains(item)) {
-                        matched.add(item);
+            else {
+                java.util.List<String> allCommands = new ArrayList<String>();
+                allCommands.addAll(commandList);
+                for(int i = 0; i < historyV.size(); i++) {
+                    String item = (String) historyV.get(i);
+                    String [] parts = item.split(" ");
+                    if(!allCommands.contains(parts[0])) {
+                        allCommands.add(parts[0]);
+                    }
+                }
+                
+                for(int i = 0; i < allCommands.size(); i++) {
+                    String item = (String) allCommands.get(i);
+                    if(item.startsWith(suffix)) {
+                        if(!matched.contains(item)) {
+                            matched.add(item);
+                        }
                     }
                 }
             }
