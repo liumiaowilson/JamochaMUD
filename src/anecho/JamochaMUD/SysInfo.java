@@ -91,7 +91,7 @@ public class SysInfo {
             if (DEBUG) {
                 System.out.println(java.util.ResourceBundle.getBundle("anecho/JamochaMUD/JamochaMUDBundle").getString("JamochaMUD..._going_multiuser"));
             }
-            userDir = new String(systemData.getProperty("user.home") + pathSeparator + "anecho" + pathSeparator + "JamochaMUD" + pathSeparator);
+            userDir = new String(systemData.getProperty("user.home") + pathSeparator + "JamochaMUD" + pathSeparator + "SavedData" + pathSeparator);
             userPlugInDir = userDir + "plugins";
         }
 
@@ -117,5 +117,6 @@ public class SysInfo {
         settings.setJMValue(JMConfig.OSNAME, systemData.getProperty("os.name"));        
         settings.setJMValue(JMConfig.USERPLUGINDIR, userPlugInDir);
 
+        settings.setJMValue(JMConfig.COMMANDS_FILE, "~/CoffeeMUD/access_words.txt");
     }
 }

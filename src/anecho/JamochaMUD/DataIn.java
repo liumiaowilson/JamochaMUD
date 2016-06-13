@@ -25,6 +25,9 @@ import anecho.JamochaMUD.TinyFugue.JMTFKeys;
 import anecho.extranet.event.TelnetEvent;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -126,6 +129,8 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
     private String lastProposal = null;
     
     private String initialInput = null;
+    
+    private java.util.List<String> commandList = null;
 
     private final AbstractLogger logger;
 
@@ -150,6 +155,32 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
         }
 
         historyV = new Vector();
+        
+        commandList = new ArrayList<String>();
+        String commandsFile = settings.getJMString(JMConfig.COMMANDS_FILE);
+        String userHome = System.getProperty("user.home");
+        commandsFile = commandsFile.replace("~", userHome);
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader(commandsFile));
+            while(true) {
+                String line = br.readLine();
+                if(line == null) {
+                    break;
+                }
+                commandList.add(line);
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         // tfCommand = new JMTFCommands();
         // final JMTFCommands tfCommand = JMTFCommands.getInstance();
@@ -330,7 +361,18 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
             for(int i = 0; i < historyV.size(); i++) {
                 String item = (String) historyV.get(i);
                 if(item.startsWith(suffix)) {
-                    matched.add(item);
+                    if(!matched.contains(item)) {
+                        matched.add(item);
+                    }
+                }
+            }
+            
+            for(int i = 0; i < commandList.size(); i++) {
+                String item = (String) commandList.get(i);
+                if(item.startsWith(suffix)) {
+                    if(!matched.contains(item)) {
+                        matched.add(item);
+                    }
                 }
             }
             

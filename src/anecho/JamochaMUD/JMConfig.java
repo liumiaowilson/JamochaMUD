@@ -172,6 +172,8 @@ final public class JMConfig {
     public static final String WORLD = java.util.ResourceBundle.getBundle("anecho/JamochaMUD/JamochaMUDBundle").getString("World");
     public static final String BUNDLEBASE = java.util.ResourceBundle.getBundle("anecho/JamochaMUD/JamochaMUDBundle").getString("anecho.JamochaMUD.JamochaMUDBundle");
 
+    public static final String COMMANDS_FILE = "CommandsFile";
+    
     /**
      * Our constructor is empty, and we like it that way! Well, actually, all
      * our variables should have some base value straight &quot;out of the box".

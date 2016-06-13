@@ -294,6 +294,10 @@ public class JMParseRC {
                 if (tmpString.startsWith(java.util.ResourceBundle.getBundle("anecho/JamochaMUD/JamochaMUDBundle").getString("/set"))) {
                     jMAddVariable(i);
                 }
+                
+                if (tmpString.equalsIgnoreCase('[' + JMConfig.COMMANDS_FILE + ']')) {
+                    JMConfig.getInstance().setJMValue(JMConfig.COMMANDS_FILE, fileLines[i+1].trim());
+                }
 
 //                if (tmpString.startsWith('[' + JMConfig.CUSTOMPALETTE)) {
 //                    logger.debug("JMParseRC: checking custom palette: " + tmpString);

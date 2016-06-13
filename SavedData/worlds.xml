@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.7.0_80" class="java.beans.XMLDecoder">
+ <object class="javax.swing.tree.DefaultTreeModel">
+  <object class="javax.swing.tree.DefaultMutableTreeNode">
+   <void property="userObject">
+    <string>Worlds</string>
+   </void>
+   <void method="add">
+    <object class="anecho.JamochaMUD.World" id="World0">
+     <void property="address">
+      <string>localhost</string>
+     </void>
+     <void property="codePage">
+      <string>cp437</string>
+     </void>
+     <void id="ImageIcon0" property="icon"/>
+     <void property="icon">
+      <object idref="ImageIcon0"/>
+     </void>
+     <void property="port">
+      <int>5555</int>
+     </void>
+     <void property="worldID">
+      <long>1465810474404</long>
+     </void>
+     <void property="worldName">
+      <string>Wilson MUD</string>
+     </void>
+    </object>
+   </void>
+  </object>
+ </object>
+ <null/>
+</java>
