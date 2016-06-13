@@ -126,7 +126,7 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
      */
     public static final int DOWN = 1;
     
-    private String lastProposal = null;
+    private int lastProposal = 0;
     
     private String initialInput = null;
     
@@ -382,14 +382,12 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
                 suffix = matched.get(0);
             }
             else {
-                for(String m : matched) {
-                    if(!m.equals(lastProposal)) {
-                        initialInput = suffix;
-                        suffix = m;
-                        lastProposal = m;
-                        break;
-                    }
+                if(lastProposal >= matched.size()) {
+                    lastProposal = 0;
                 }
+                initialInput = suffix;
+                suffix = matched.get(lastProposal);
+                lastProposal++;
             }
             
             text = prefix + suffix;
