@@ -1,0 +1,263 @@
+/* This is the JamochaMUD Jazzy Java spell-checking plug-in.
+ * Using this plug-in will do on-the-fly spell-checking for
+ * JamochaMUD's text input window.
+ */
+
+package anecho.JamochaMUD.plugins;
+
+import anecho.JamochaMUD.JMConfig;
+import anecho.JamochaMUD.MuSocket;
+// import anecho.JamochaMUD.DataIn;
+
+import java.io.File;
+import java.awt.Component;
+import java.awt.event.*;
+
+import com.swabunga.spell.engine.SpellDictionary;
+import com.swabunga.spell.engine.SpellDictionaryHashMap;
+
+/* We have to import EnumPlugIns if we want to interact
+ * with the MU* itself, as EnumPlugIns contains the
+ * API to do so.  It is possible for you to interact
+ * with EnumPlugIns directly, but hopefully by using
+ * the Loader object, all plugins would not need to be
+ * substantially rewritten incase this changes in the future */
+
+public class JazzySpell implements PlugInterface, KeyListener {
+
+    JMConfig settings;
+    private boolean active = false;
+
+    // In the future, make the dictionary user-definable
+    // private String dictFile = "f:/programming/dict/english.0"; // Dictionary file
+    // private String dictFile = "f:/programming/dict/eng_com.dic"; // Dictionary file
+    private String dictFile;
+    // private String phoneticFile = "F:/Programming/dict/en_phonet.dat"; // Phonetic file
+    // private String phoneticFile; // Phonetic file
+
+    SpellDictionary dictionary;
+    // private SpellChecker spellCheck = null;
+
+    public void setSettings(JMConfig mainSettings) {
+        this.settings = mainSettings;
+    }
+
+    /** This method returns the name of the plug-in */
+    public String PlugInName() {
+        // Nothin'
+        return "Jazzy input spell-checker";
+    }
+
+    /** A basic description of the plug-in that is shown in
+     * the JamochaMUD &quot;Manage Plugins" dialogue box
+     */
+    public String PlugInDescription() {
+        return "This plug-in uses the Jazzy Java API to add on-the-fly spell-checking to JamochaMUD's text input window.  To function correctly this plug-in requires the Jazzy classes to be correctly installed (and included in your Java CLASSPATH).";
+    }
+
+    /** This indicates what type of plugin this is, ie: input or output.
+     * This setting will affect what information JamochaMUD tries to
+     * process with this plug-in.
+     * If the plug-in is set to a setting that JamochaMUD does not
+     * understand than the plugin will be ignored.
+     */
+    public String PlugInType() {
+        return "other";
+    }
+
+    /** This is the main method of the plug-in.  It is passed both
+     * a string for processing as well as and associated MU* that
+     * the message is coming from/going to.
+     */
+    public String PlugMain(String jamochaString, MuSocket mu) {
+        return jamochaString;
+    }
+
+    /** In the future this method will allow the user to select the
+     * preferred language or &quot;language dialect".
+     */
+    public void PlugInProperties() {
+        setDictionary();
+    }
+
+    /** This method is called as soon as the plugin is first loaded.
+     * It is useful for loading or configuring anything needed by
+     * the plug-in at start-up (such as loading settings).
+     */
+    public void InitialiseAtLoad() {
+        System.out.println("JazzySpell initialise at load started.");
+
+        try {
+            String pathSeparator = java.io.File.separator;
+            String plugIns = settings.getJMString(JMConfig.USERPLUGINDIR);
+            String configDir = plugIns + pathSeparator + "JazzySpellDir";
+            File configFile = new File(configDir + pathSeparator + ".jazzyspell.rc");
+
+            java.io.RandomAccessFile reader = new java.io.RandomAccessFile(configFile, "r");
+            dictFile = (reader.readLine()).trim();
+            reader.close();
+
+        } catch (Exception e) {
+            System.out.println("Exception while trying to read in .jazzyspell.rc: " + e);
+        }
+
+        if (dictFile != null) {
+            try {
+                // if (phoneticFile != null) {
+                // dictionary = new SpellDictionaryHashMap(new File(dictFile), new File(phoneticFile));
+                // } else {
+                dictionary = new SpellDictionaryHashMap(new File(dictFile));
+                // }
+                System.out.println("JazzySpell dictionary " + dictFile + " successfully loaded.");
+                // spellCheck.checkSpelling("foo");
+
+            } catch (Exception e) {
+                System.out.println("JazzySpell exception caught: " + e);
+                System.out.println("Dictionary not loaded.");
+            }
+
+            
+        }
+
+    }
+
+    /** Turn this plug-in on */
+    public void Activate() {
+        // Add a keylistener to the input window to catch text events.
+        // We will only be looking for when the user hits the space-bar and
+        // then grab the last typed word for processing
+        Component listenerTarget = (settings.getDataInVariable()).getTextVariable();
+        listenerTarget.addKeyListener(this);
+        active = true;
+    }
+
+    /** Shut down the plug-in by removing the keyListener */
+    public void Deactivate() {
+        try {
+            Component listenerTarget = (settings.getDataInVariable()).getTextVariable();
+            listenerTarget.removeKeyListener(this);
+        } catch (Exception rKL) {
+            // Most likely this error is caused by our display elements not being fully
+            // initialised yet, and is okay to ignore.
+            // System.err.println("JazzySpell removeKeyListener error: " + rKL);
+        }
+        active = false;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    /* In the future we may have to save the location of our dictionary file */
+    public void SetAtHalt() {
+        if (dictFile != null) {
+            // Write out the path and filename of the dictionary file
+            try {
+                String pathSeparator = java.io.File.separator;
+                String plugIns = settings.getJMString(JMConfig.USERPLUGINDIR);
+                String configDir = plugIns + pathSeparator + "JazzySpellDir";
+                File configFile = new File(configDir + pathSeparator + ".jazzyspell.rc");
+
+                java.io.RandomAccessFile writer = new java.io.RandomAccessFile(configFile, "rw");
+                writer.writeBytes(dictFile.trim());
+                writer.close();
+
+
+            } catch (Exception e) {
+                System.out.println("Exception while trying to write out .jazzyspell.rc: " + e);
+            }
+
+        }
+    }
+
+    /** This method tells JamochaMUD whether this plugin should have
+     * its own person configuration directory where it can keep its
+     * settings.
+     * A return of false means that the plugin has no settings that
+     * need to be saved to disk.
+     * A return of true tells JamochaMUD to create a settings directory
+     * for this plugin (if one does not already exist).
+     */
+    public boolean haveConfig() {
+        return true;
+    }
+
+    public boolean HasProperties() {
+        return true;
+    }
+
+    /** Get the keyTyped.  We are only looking for the space-bar, though */
+    public void keyTyped(KeyEvent key) {
+        char testChar = key.getKeyChar();
+
+        if (testChar == KeyEvent.VK_SPACE) {
+            String testWord = (settings.getDataInVariable()).getLastWord();
+
+            if (!testWord.equals("") && !dictionary.isCorrect(testWord)) {
+                spellingError();
+            }
+        }
+
+    }
+
+    public void keyPressed(KeyEvent key) {
+    }
+
+    public void keyReleased(KeyEvent key) {
+    }
+
+    /** This event will be fired if a spelling error is detected.
+     * Current plans are to make a &quot;system beep" is an error is detected.
+     * Future events may allow for the user to right-click on a word for suggestions.
+     */
+    private void spellingError() {
+        java.awt.Toolkit.getDefaultToolkit().beep();
+    }
+
+    /** Create a dialogue that will allow the user to select a Dictionary file */
+    private void setDictionary() {
+        /*        java.awt.FileDialog dictPath = new java.awt.FileDialog(settings.getJMFrame(settings.MUCKMAINFRAME),
+         "Choose a dictionary file",
+         java.awt.FileDialog.LOAD);
+         */
+        javax.swing.JFileChooser dictPath = new javax.swing.JFileChooser();
+        dictPath.setDialogTitle("Choose a dictionary file");
+
+        if (dictFile != null) {
+            try {
+                // dictPath.setFile(dictFile);
+                dictPath.setCurrentDirectory(new File(dictFile));
+            } catch (Exception e) {
+                System.out.println("Exception setting existing dictFile.");
+            }
+        }
+
+        // dictPath.show();
+        int returnVal = dictPath.showOpenDialog(settings.getJMFrame(settings.MUCKMAINFRAME));
+
+        // System.out.println("Our chosen file was: " + dictPath.getFile());
+
+        /*
+        String newDict; = dictPath.getFile();
+
+        // Assign and load our new dictionary!
+        System.out.println("5.");
+
+        if (newDict != null) {
+            System.out.println("6.");
+
+            dictFile = newDict;
+            System.out.println("7.");
+            InitialiseAtLoad();
+            System.out.println("8.");
+
+            }
+            */
+        if(returnVal == javax.swing.JFileChooser.APPROVE_OPTION) {
+            // dictFile = dictPath.getSelectedFile().getName();
+            dictFile = (dictPath.getSelectedFile()).getAbsolutePath();
+            // System.out.println("New dictionary file is: " + dictFile);
+            InitialiseAtLoad(); // Load the new dictionary!
+        }
+    }
+}

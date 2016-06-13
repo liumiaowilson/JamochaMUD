@@ -1,0 +1,196 @@
+Clear screen signal
+[H[J
+The terminal has been cleared
+[J
+
+This terminal has been cleared a second time
+
+This file contains some standard tests for the JMSwingText ANSI interpreter
+
+[0mNormal text[0m
+[1mBold   (This gives the color higher intensity)[0m
+[4mUnderline[0m
+[5mBlinking[0m
+[7mReverse (Foreground -> Background, Background -> Foreground)[0m
+[8mHidden[0m
+[9mStrike-through[0m
+***** Foreground color *****
+[30mBlack[0m
+[31mRed[0m
+[32mGreen[0m
+[33mYellow[0m
+[34mBlue[0m
+[35mMagenta[0m
+[36mCyan[0m
+[37mWhite[0m
+
+***** Bold *****
+[30m[1mBlack[0m
+[31m[1mRed[0m
+[32m[1mGreen[0m
+[33m[1mYellow[0m
+[34m[1mBlue[0m
+[35m[1mMagenta[0m
+[36m[1mCyan[0m
+[37m[1mWhite[0m
+
+[0mBackground color[0m
+[39mReset background colour[0m
+[40mBlack[0m
+[41mRed[0m
+[42mGreen[0m
+[43mYellow[0m
+[44mBlue[0m
+[45mMagenta[0m
+[46mCyan[0m
+[47mWhite[0m
+
+***** Combined Tests *****
+[30m[41mBlack text on Red background[0m
+[35m[44m[1mBold Magenta text on blue background[0m
+[37m[42m[4mUnderlined White text on green background[0m
+[37m[42m[1m[4mBold Underlined White text on green background[0m
+
+**** Test using ESC[0;0m format ****
+[0;30mBlack[0m
+[0;31mRed[0m
+[0;32mGreen[0m
+[0;33mYellow[0m
+[0;34mBlue[0m
+[0;35mMagenta[0m
+[0;36mCyan[0m
+[0;37mWhite[0m
+
+[1;30mBlack[0m
+[1;31mRed[0m
+[1;32mGreen[0m
+[1;33mYellow[0m
+[1;34mBlue[0m
+[1;35mMagenta[0m
+[1;36mCyan[0m
+[1;37mWhite[0m
+
+[0mBackground color[0m
+[39mReset background colour[0m
+[40mBlack[0m
+[41mRed[0m
+[42mGreen[0m
+[43mYellow[0m
+[44mBlue[0m
+[45mMagenta[0m
+[46mCyan[0m
+[47mWhite[0m
+
+***** Input should be bold but incorrectly shows background colour *****
+[1;34;40m--[ [0;36;40mFound [1;33;40m9 [0;36;40mcharacters. ( [1;33;40m1 [0;36;40mAwake / [1;33;40m8 [0;36;40mAsleep [0;36;40m) [1;34;40m]------------------------------[0m
+
+***** Faulty input.  The last element doesn't have a closing "m". *****
+[#ff00ffmcouches on which to relax.   [1;30;40m||            [1;37;40mWelcome[0;37;40m, [1;37;40mGuest[0;37;40m, [1;37;4[0m
+
+***** Test of using hex codes for colours ****
+[#00ff00mGreen Text Using a hex code[0m
+
+***** Test of using hex codes for colours ****
+[#00ff00;#ff00ffmGreen Text with purple background using a hex code[0m
+
+***** Assembled URL *****
+[!http://www.jamochamud.org]
+
+***** Assembled URL with text *****
+[!http://www.jamochamud.org;!Assembled link to JamochaMUD]
+
+***** Swedish text *****
+Attempting connection to mud.grytet.org...
+Kontrollerar din mudklient.
+> 
+  ___________________________________________
+ / \                                         \
+( O |                                         |
+ \_/|                                         |
+    |        V�lkommen till Gryningstid      -<
+    |                                         |
+    >-  Gryningstid �r ett fantasybaserat     |
+    |   rollspeV�lkommen till Gryningstidlsbetonat mud, helt p�       --<
+    >-- svenska.                              |
+    |                                         |
+    |   Mer information om vad Gryningstid    |
+    >-  och Mud �r kan du hitta p� Grytet.org  |
+    |                                         |
+    |                                       --<
+    |   3 �ventyrare finns i v�rlden just nu. |
+    |                                         |
+    | ________________________________________|_
+    |/ \________________________________________\ 
+    | O )                                        )
+     \_/________________________________________/ 
+
+
+
+Ditt kontonamn eller 'ny' f�r nytt konto: 
+
+**** Dangling escape *****
+the room are several video   
+
+[1z
+&unknownentity;&lt;&gt;<c yellow back=blue>starting</c> text
+ and<font size=11 blue blackx face='\"\"><<>Times New Roman' 13>more
+<font face=\"baaah\"></font></font> text\r\n[1zline 2
+ <S><b><i>with bold text, &Aacute;, &lt;, &gt;, unfinished &
+[3z</BoLd>:)<a href=\r\nline 3
+[6z
+<hr><p>line1\r\nline2\r\nline3\r\nline4\r\n all on the same line!</p>
+
+break line here<br><nobr>this won't break \r\nstill
+the same line\r\nanother line
+<c darkgreen> dark green <h>High-color</h> Normal color</c>\r\n
+<a \"http://www.kmuddy.org\" KMuddy kmuddy>Click here for KMuddy</a>
+<send href=\"buy bread|buy milk\" hINt=\"this is a hint|bread hint|
+milk hint\" expire=link>yes, bread</send>
+<expire link><expire>\n
+<VeRsIoN>\n
+<sound bah.wav v=10000 p=30 c=1><music chrm.mid u=none>
+<gauge hp max=maxhp caption='Your HP' color=green><stat sp max=maxsp
+caption='Spell points' invalid>
+<relocate port=8080 name=bah server=test><user><password>\n
+<image bah.jpg URL=www.url.org t=type1 h=100 w=50 align=middle
+vspace=10 hspace=10><image bah.jpg ISMaP><send showmap>
+<image bah.jpg ismap></send>\n
+<!en test mytest DESC=desc PUBLISH>&test;<!en test DELETE>
+<v bah>some<b></b>thing</v>\n
+<h2>Heading 2</h2><h5>Heading 5</h5>\r\n<small>small</small>
+<tt>non-proportional</tt>\r\n
+
+<frame name=Status redirect Height=30>
+text for status
+<frame _previous redirect>
+<dest status>100</dest>
+<dest status eof>100</dest>
+<frame Status close>\r\n
+<!-- this is a comment, <b> stuff not parsed -->\r\n
+This will break the line: \rnew line\r\n
+
+//OKay, here goes the !element testing...
+//EMPTY and OPEN flags have been successfully tested :)*/
+<!element boldred '<color red><b>'>
+normal, <boldred>bold red</boldred>, normal again\n
+<!element ex '<send>'><ex>n</ex><ex>s</ex>\r\n
+<!entity col 'This should not be displayed' private>
+<!element bt '<b><c &col;>' att='col=red' flag=hrm>
+<bt>bold red <bt blue>bold blue</bt></bt>\r\n
+<!attlist bt 'col=green'>
+<bt>bold green <bt blue>bold blue</bt></bt>\r\n
+<!el bt delete><bt>in invalid tag</bt>\r\n
+<!el tagtest '<b><u><i>' tag=28>\r\n
+[28zthis should be b,u,i\r\nnormal\r\n
+
+This should produce a menu with commands
+<send "command1|command2|command3" hint="click to see menu|Item 1|Item 2|Item 2">this is a menu link</send>
+Did this work?
+
+This scenario causes the first and third link to not appear:
+Rafferty sez, "BTW, http://www.youtube.com/watch?v=rVxTsXRjNTw is awesome."
+Kapoor is AWESOME
+Athelind rumbles, "Holy cow. That WAS awesome."
+Kehza drats and must've missed a link.  He needs a better MUD-client (or programmer).
+Athelind rumbles, "http://www.youtube.com/watch?v=rVxTsXRjNTw "
+Rafferty sez, " http://www.youtube.com/watch?v=QgOB7VWjlSQ is funny for other reasons. "

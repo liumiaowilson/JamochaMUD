@@ -1,0 +1,22 @@
+[Desktop Entry]
+Categories=Network;Internet
+Comment=JamochaMUD, a Java MUD/Muck client
+Comment[en_US]=
+Encoding=UTF-8
+#Exec=java -jar JamochaMUD.jar
+#Exec=java anecho.JamochaMUD.JMUD
+Exec=JamochaMUD/JMUD_bootstrap
+GenericName=
+GenericName[en_US]=
+Icon=JamochaMUD
+MimeType=
+Name=JamochaMUD
+Name[en_US]=JamochaMUD
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DCOP-ServiceType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

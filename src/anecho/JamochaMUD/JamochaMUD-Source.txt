@@ -1,0 +1,33 @@
+                          Upload Information Template for Hobbes.nmsu.edu
+                          ===============================================
+
+        Archive Filename: JamochaMUD-Source-JMUDLevel-JMUDVersion.zip
+       Short Description: Source-code for JamochaMUD, an open-source Java MU* client, JMUDLevel, release JMUDVersion
+        Long Description: 	JamochaMUD offers unicode, plug-in, and multi-language support
+				(currently 8 different languages) to allow a more enjoyable
+				MUCKing/MUDding experience!  Featuring multi-mucking, 
+				command history, synchronized window movements, 
+				experimental Socks5 support, user defined variables and definitions,
+				and greatly improved ANSI colour support.  Plays nice on *nix 
+				systems, supports a wider range of MU*'s than before, and also 
+				includes emulation of some TinyFugue editor controls.
+				All this while still only using Java 1.1.  See the read.me for 
+				more information!
+
+      Proposed directory
+           for placement: /pub/java/apps/internet/mud
+
+               Your name:  Jeff Robinson
+           Email address: jeffnik@anecho.mb.ca
+    Program contact name: (same)
+   Program contact email: (same)
+             Program URL: http://www.jamochamud.org/
+
+      Would you like the
+   contact email address
+    included in listings? yes
+
+Operating System/Version: Java 1.1.4 or higher
+ Additional requirements: (none)
+
+                Replaces: JamochaMUD-Source-*.zip

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE attributes PUBLIC "-//NetBeans//DTD DefaultAttributes 1.0//EN" "http://www.netbeans.org/dtds/attributes-1_0.dtd">
+<attributes version="1.0">
+    <fileobject name="ColourPicker.java">
+        <attr name="class_dependency_java.awt.Dialog" stringvalue="ColourPicker"/>
+        <attr name="class_dependency_java.awt.event.ActionListener" stringvalue="ColourPicker"/>
+        <attr name="class_dependency_java.awt.event.AdjustmentListener" stringvalue="ColourPicker"/>
+        <attr name="class_dependency_java.awt.event.KeyListener" stringvalue="ColourPicker"/>
+    </fileobject>
+    <fileobject name="Dialog.java">
+        <attr name="class_dependency_java.awt.Dialog" stringvalue="Dialog"/>
+    </fileobject>
+    <fileobject name="JMSwingText.java">
+        <attr name="class_dependency_java.awt.event.KeyListener" stringvalue="JMSwingText"/>
+        <attr name="class_dependency_java.awt.event.MouseListener" stringvalue="JMSwingText"/>
+        <attr name="class_dependency_javax.swing.JScrollPane" stringvalue="JMSwingText"/>
+    </fileobject>
+</attributes>

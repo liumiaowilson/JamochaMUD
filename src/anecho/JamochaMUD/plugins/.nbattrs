@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE attributes PUBLIC "-//NetBeans//DTD DefaultAttributes 1.0//EN" "http://www.netbeans.org/dtds/attributes-1_0.dtd">
+<attributes version="1.0">
+    <fileobject name="MusicBox.java">
+        <attr name="class_dependency_anecho.JamochaMUD.plugins.PlugInterface" stringvalue="MusicBox"/>
+        <attr name="class_dependency_java.awt.event.KeyListener" stringvalue="MusicBox"/>
+    </fileobject>
+    <fileobject name="Trigger.java">
+        <attr name="class_dependency_anecho.JamochaMUD.plugins.PlugInterface" stringvalue="Trigger"/>
+    </fileobject>
+    <fileobject name="Trigger_1.java">
+        <attr name="class_dependency_java.awt.event.ActionListener" stringvalue="Trigger_1"/>
+        <attr name="class_dependency_java.awt.event.ItemListener" stringvalue="Trigger_1"/>
+    </fileobject>
+</attributes>

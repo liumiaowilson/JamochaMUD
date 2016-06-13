@@ -1,0 +1,396 @@
+JamochaMUD - the on-line readme
+컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+
+Index
+
+* Compiling JamochaMUD
+* How to start JamochaMUD
+
+* OS/2
+* Win32 (Windows 95/98/NT)
+* Unixes
+
+* Using JamochaMUD
+
+* How to pause scrolling
+* Scrollback
+* Supervisor Feature
+* Tiny Fugue key bindings
+* Double-click copy
+
+* Why are things all wonky?
+
+* Settings are not working
+* Not all options work
+* Frame &quot;stuttering"
+* No audio when using gags/triggers
+
+* Language Resource Bundles
+
+* How to use other languages
+* Making your own language bundle
+
+* Launching external programs
+
+
+컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+
+
+Compiling JamochaMUD
+
+The basic assumption that we'll make here is that you have
+ downloaded (preferably) the newest
+source-code for JamochaMUD and have unpacked it,
+and have a working Java Development Environment.  (The documentation that
+came with your JDK will help you determine if you've got everything set up
+right).
+
+Make certain that the anecho directory is included in your classpath.
+You should be able to determine this from the command line by using echo %classpath%
+in OS/2 or Windows, and most likely echo $classpath under most Unix-like systems.
+The classpath should point to the directory below the anecho
+directory.  For example, if you have unzip'd/untar'd the JamochaMUD archive so you have
+a directory structure akin to:
+
+
+JavaPrograms+
++anecho+
++gui
++JamochaMUD
++extranet
+
+You only have to include JavaPrograms in your classpath.  This can be done by
+typing set classpath=%classpath%;locationofJavaPrograms in OS/2 and Windows,
+and by doing export classpath=$classpath:locationofJavaPrograms in a Unix-like system.
+
+Now enter into the anecho\JamochaMUD directory of the JamochaMUD source, which should have a
+whole whack of .java files.  Since there is no fancy makefile or somesuch at this
+time, we'll do it by hand.
+
+Simply typing: javac -depend JMUD.java should be enough to get the
+compiler off and running.  It will compile all the files needed by JamochaMUD to run.
+(In newer versions of the JDK; 1.2 and up, you may need to use javac *.java
+from the main JamochaMUD directory.  It should then compile the appropriate subdirectories, except
+the plugins subdirectory, as noted).
+If you have downloaded any additional plugins, you will probably need to go into the
+'plugins' directory, and sick javac on those *.java files as well by doing a
+javac plugins\*.java (though the slash may vary depending on your system).
+Having the plugins remain uncompiled is not disastrous to JamochaMUD, but needless to
+say makes the plugins themselves a *LOT* less functional.
+
+
+How to start JamochaMUD!
+
+There has been rather strong demand for this section.  (OOOOPSE).
+Anyways... to key file here is the one called JMUD.class.
+This file must be used by your Java environment to start the program.
+(If you find you do not have a MuckConn.class file, then there is
+probably a good chance you accidentally downloaded the sourcecode
+instead of the byte-code.  If you have the JDK, you can compile the
+source yourself.... but otherwise you'll have to go back for the
+byte-code!)
+
+
+OS/2
+
+*  Setting up JamochaMUD in OS/2 has gotten much easier now.  A WarpIn installation
+package is now available that will install JamochaMUD and write a small
+start-up command that will (hopefully) give you an operable JamochaMUD.  It
+should be as easy as download and double-click!
+*  For those of you who wish not to use WarpIn, you can still download a .zip file
+of the JamochaMUD byte-code.  Unzip this into where-ever you wish to keep
+JamochaMUD.  Double-click the os2setup.cmd script that is found in
+the anecho\JamochaMUD directory and you will get a desktop icon which you can
+launch JamochaMUD from.
+*  And then, the folks that want to run things from the command-line:
+Ensuring that JamochaMUD is in your classpath; as detailed
+under Compiling JamochaMUD, navigate into the
+anecho\JamochaMUD directory.  Here, you should be able to start java by typing
+java anecho.JamochaMUD.JMUD or jre anecho.JamochaMUD.JMUD,
+depending on the version of Java installed on your system.
+
+
+Win32 environments (Windows 95/98/NT)
+
+*  The Windows archive of JamochaMUD is now available in a self-extracting Windows
+installer.  Simply download the archive and double-click.  You will be
+presented with your standard installation choices.  When the installation is
+complete you will have a JamochaMUD group under your START->Programs menu
+(and optionally a desktop icon).  If JamochaMUD does not seem to start
+correctly, please ensure that the settings are correct in the JamochaMUD
+properties of the desktop/program icon.  Please contact me if there are
+difficulties so that the installer can be fixed.
+
+
+Unixes
+
+* Instructions still pending, but for the time being, it seems that the Win32
+instructions seem to hold true... 'jre' for older version of Java, and 'java' for
+Java2.
+
+
+This should get you up and running.  Of course, there are different variations for different OS's,
+so until I get a documentation page up, you'll have to just consult the literature you got
+with your JRE or JDK download.
+
+컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+
+
+
+Using JamochaMUD!
+
+Theoretically, using JamochaMUD should be the easiest part of the whole deal... if it
+isn't, you'd best give me some feedback at
+jeffnik@anecho.mb.ca so I can make it otherwise!
+Okay, so maybe not the actual using of JamochaMUD is hard, but there are probably a
+bunch of little things that'll make it more enjoyable.
+
+
+How do I pause the scrolling on the screen, it's all
+going by too fast!?
+
+There are a couple different ways for you to stop the scrolling, 'cause I know... I've
+been there and sometimes there's just way too much to take in.  If you click the main
+window once with the mouse, it should pause the scrolling.  This will be indicated by
+an **Output Paused** indicator on the title bar of the text-entry window.
+
+If &quot;Tiny Fugue Key Emulation" is turned
+on (under the Options menu), you can also use the key combination of Ctrl-S to perform the same feat.
+
+To &quot;unlock" the scrolling, you can simply start typing or click on the data-entry window.  (Or Ctrl-Q for you TF-types).
+
+
+Didn't you include a command-scrollback, so I don't have to type?
+
+Yup, actually there is one (and always has been), it's just perhaps not
+easily identified at first.  All you do is right-mouse-click on the
+Text-entry box, and you'll get a pop-up menu of your last 10 or
+so commands to the MU*.  (Note that for users of 1-button mice;
+mouses?; you'll probably need to do a key combination like
+Ctrl+mouse-click).
+
+
+How do I use the Supervisor keys?
+
+To activate 'supervisor' mode, you just need to hit CTRL and the 'x' key at the same
+time.  This'll make all frames disappear but for the databar.
+
+Tapping CTRL and the 'z' key will return the invisible frames to their previous position.
+
+
+Don't you think this Supervisor thing is sort've slipshod?
+
+Yeah.  Don't tell anyone.
+
+The main problem with the supervisor function right now is that Java is made to be
+platform independent.  Whereas I'd like to minimize the frames so that they're
+not visible, and iconify the databar (perhaps retitling it, which would not be a
+problem), not all platforms support 'iconifying' frames.  So, until such time as I
+figure something out, or I get some better suggestions, I guess this is how it
+has to work.
+
+
+What's this about TinyFugue 'key bindings'?
+
+This was a request by a few users to include some of the editor functions of
+TinyFugue in JamochaMUD.  It didn't seem like that much work, and when it
+was done, I was actually quite pleased with the result!  These little keycodes
+just help you dance around your text better (which is a good thing if you keep
+changing your mind about what you're going to type, like I do).  I haven't
+implemented all the commands (yet?), and some will be slightly different than
+TinyFugue simply to fit into how JamochaMUD handles things.  (And hey, if you
+don't like them, you can still turn them off from the menu!) Here's a little
+list of what is incorporated so far:
+
+*  ^B (CTRL + B) - Move the cursor left to the beginning of the word
+*  ^F (CTRL + F) - Move the cursor right to the end of the word
+*  ^K (CTRL + K) - Delete from the cursor's position to the end of the line
+*  ^N (CTRL + N) - Show the JamochaMUD command history pop-up
+*  ^P (CTRL + P) - Recall the previously typed line
+*  ^Q (CTRL + Q) - Release the locked scrolling of the main window's text
+*  ^S (CTRL + S) - Pause (lock) the scrolling of the main window's text
+*  ^T (CTRL + T) - Transpose the characters on either side of the cursor
+*  ^U (CTRL + U) - Erase the entire line
+*  ^W (CTRL + W) - Erase the previous word
+
+
+
+Double-click copy
+
+As I have not worked out a consistent cross-platform way of launching a web-browser
+from a double-click (on a link) in the output window, I've added a convenience-feature
+instead.
+
+Simply double-clicking on a word (defined by having white space on either side) will
+that word to the system clipboard.  You may the past this into your web-browser of
+choice.
+
+
+컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+
+
+
+
+Why is JamochaMUD all wonky?!
+
+That's a pretty general question.  I'll try and break it down.
+
+
+Okay then, why are things (fonts, window positions, etc.) messed up when I (re)start JamochaMUD?
+
+
+Chances are that there was some sort've problem writing to the
+.jamocha.rc file last time the program was used.  I'm
+trying to make a decent enough program that'll deal with this
+weirdness, but of course, nothing is perfect.  (Like JamochaMUD
+is even close yet... but anyhow).  How to deal with this
+weirdness:
+
+* First of all, you could just erase the file called .jamocha.rc.
+When the program restarts, it will generate a new .jamocha.rc if
+one doesn't exist.  This should almost always solve the problem,
+though it has the problem of losing all your window positions,
+preset macros, colours, and worlds.  Of course, some of you
+might not give a damn, either.
+* A second option is to use your favourite editor (such as E.EXE, vi,
+notepad, etc.) and open the .jamocha.rc file.  It has been
+made human readable, with each section consisting of a heading
+within square brackets (such as [Worlds]).  Find the section you
+are having trouble with, and either selectively delete that section
+(including the header) until you reach the header of the next
+section (or the end of the file).  This section will the be
+regenerated when you restart JamochaMUD.
+* A third option, which starts the same as the second (opening
+.jamocha.rc in a text editor, and dabbling with the
+information in the 'corrupted' section.  This is for those with lots
+of spare time.
+
+
+Is something broken?  Not all these menu options seem to work.
+
+Okay okay... I'm trying to change my lazy ways.  The menu options that don't seem to work *should* have been disabled before I put JMUD out for public consumption.  Of course, sometimes things like this slip through, me being such an efficient worker and stuff.  If you find something of this sort, and it is problematic, feel free to drop me a line at jeffnik@anecho.mb.ca and let me know!
+
+
+컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+
+
+
+How do I use the language resource bundles?
+
+This one is actually rather easy to deal with.  Currently, you can just download the
+Resource Bundle that represents your language.  (This decision will also be
+tailored by some of your Operating System information, but a longer explanation
+later).  Chances are, you will have to manually save the link (Netscape, at least,
+has a tendency to just display the file as a page, instead of downloading it
+automagically).  Once you have this link, you copy it
+into the directory you are running JamochaMUD from, and start the
+program... that should be it.  Please note that if you try to run a language bundle
+that is 'outside' your OS's settings (such as a German bundle on a machine set
+up to run English), chances are, you will only get the results of the English
+bundle.  There are settings in your OS you can tweak to change this, but that is
+up to your own discretion and experimentation.  (Read as - NO WARRANTIES
+and STUFF).
+
+
+Can I make my own language resource bundles?
+
+YUP!  You sure can.  The only restriction on language resource bundles is that they
+follow a set protocol for naming (otherwise JamochaMUD won't recognize them
+as resource bundles).  If you do write a resource bundle for a language which I
+don't have, I'd love to have you submit it to me.  (Or even corrections or
+additions to existing languages that I already have).
+The naming convention is as follows:
+
+
+As an example, we will use the US English language bundle, which is named:
+
+JamochaMUDBundle_en_US.properties
+
+
+The required portions of the bundle name are as follows: The bundle name
+(JamochaMUDBundle), the language (en = English), the locale (US = United
+States), and the extension (.properties).
+
+So where do you get these two-letter language and country codes?  They're defined by
+the ISO-639 and ISO-3166 standards documents (respectively), and can be found
+at: 
+ISO-639 language codes:
+http://www.ics.uci.edu/pub/ietf/http/related/iso639.txt and
+ISO-3166 Country
+Codes: ftp://ftp.ripe.net/iso3166-countrycodes.
+
+
+
+컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+
+
+Why does JamochaMUD go crazy when I move a frame?
+
+More than likely you are witnessing the &quot;stuttering" effect caused by the new
+&quot;SyncFrames" implements in JamochaMUD.  Theoretically this problem has
+been rectified on most platforms with the release of Beta 4 of JamochaMUD.
+Virtual desktops on Linux still seem to be having a little problem with it (or is
+that vice-versa?).  To avoid this problem one can simply turn off
+&quot;Synchronise Windows" under the &quot;Options" menu when running
+JamochaMUD.
+
+
+I'm having trouble launching external programs
+
+Support for launching external programs, such as launching Netscape when double-clicking on
+a URL is still in development, but does work to some extent in certain OSes.
+
+* 
+Under Windows, it may not function properly unless a copy of the browser is
+already running. I'll have to do more checking on this one.
+* 
+Using OS/2, you must make certain that a copy of netscdde.exe is
+somewhere in you system's PATH.  This is a handy little utility that
+comes with XWorkPlace (and of course, requires
+XWorkplace to be installed, too). The need for this little utility could be
+alleviated if someone
+could also translate Netscape's DDE reference for me, too!  Yes, I know it is
+&quot;supposed" to be in English.. but, uhm.  Not *my* type of English!
+* 
+Unixes.  It hasn't been tested so far, but works in theory.  In fact, we should
+all work in theory, because in theory everything works!  Any feedback would be
+extremely peachy (jeffnik@anecho.mb.ca).
+
+
+No audio when using gags/triggers
+
+Currently, the use of audio in JamochaMUD's gags and triggers plug-in is in a rather
+experimental stage, but has seemed to work consistently so far.  Though there are a
+couple caveats.
+
+* The &quot;Media" function requires the use of the sun.audio.* classes.
+These are extension classes generally provided by sun, but not necessarily
+guaranteed to exist in non-Sun Java environments.  If folks know of an
+alternative to this method (while still using the 1.1.x Java API), I'd be
+happy to take a look.
+* JamochaMUD can only use Sun Audio (.au) format for its sound files.  Once again,
+this is a limitation of the sun.audio.* classes.  Any feedback would be
+appreciated, if an alternative method can be worked out.
+
+컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+
+
+
+Keep checking back here, and let me know if you have any questions!
+
+Um.  Preferably about the program, y'know.
+
+
+컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+
+ Main | Features | Screenshots | Bug Hunt | Downloads | Java | On-Line Readme | Javadocs | Wish List 
+컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴
+
+
+If you're having trouble understanding, or perhaps this document makes no sense, feel
+free to drop the curator a note explaining the trouble (and/or any suggestions to make
+it better) to jeffnik@anecho.mb.ca.
+
+   All artwork presented on these pages is &copy;copyright 1996-2002 Jeff Robinson.     These images should only be used in association with JamochaMUD, and you should really really really ask the artist first, because he's known to be pretty congenial and easy going about stuph like that.  
+
+

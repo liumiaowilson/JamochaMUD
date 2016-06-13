@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+
+<shortcuts>
+  <programGroup defaultName="JamochaMUD" 
+                location="applications/startMenu"/>
+  <shortcut 
+    name="JamochaMUD"
+    target="java -jar $INSTALL_PATH\JamochaMUD.jar"
+    description="JamochaMUD, the Java MU* client"
+    iconFile="anecho/JamochaMUD/kehza.gif" 
+    iconIndex="0"
+    initialState="normal"
+    programGroup="yes"
+    desktop="yes" 
+    applications="yes" 
+    startMenu="no" 
+    startup="no">
+  
+  </shortcut>
+</shortcuts>
+
+</xml>

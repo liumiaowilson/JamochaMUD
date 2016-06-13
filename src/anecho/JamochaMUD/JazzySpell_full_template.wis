@@ -1,0 +1,53 @@
+<WARPIN OS="OS2_2X">
+	<HEAD>
+	  <TITLE>JazzySpell JMUDLevel JMUDVersion</TITLE>
+	  
+		<PCK 	INDEX=1
+			PACKAGEID="Jeff Robinson\Anecho\JamochaMUD JazzySpell Plug-in\JMUDWPIVersion"
+			TITLE="JazzySpell plug-in"
+			REQUIRES="Jeff Robinson\Anecho\JamochaMUD\04\01\01"
+			TARGET="$(Jeff Robinson\Anecho\JamochaMUD)"
+			SELECT
+			<!-- BASE -->
+		>This plug-in uses the Jazzy Java API to add on-the-fly spell-checking to JamochaMUD's text input window.  To function correctly this plug-in requires the Jazzy classes to be correctly installed (and included in your Java CLASSPATH).</PCK>
+		<PCK 	INDEX=2
+			PACKAGEID="Jazzy Group\Jazzy\Jazzy\0\5\0"
+			TITLE="Jazzy "
+			TARGET="$(WARPIN_DEFAULTTOOLSPATH)\Jazzy"
+			SELECT
+			CONFIGSYS="SET CLASSPATH=$(2)\jazzy-core.jar|ADDRIGHT"
+		>There are currently no Java OpenSource spell checkers. This is a project that is seeks to remedy that. Jazzy is based on most of the algorithms that aspell has -- so the suggestions they come up with are very similar.</PCK>
+		<PCK 	INDEX=3
+			PACKAGEID="Jazzy Group\Jazzy\Dictionary (English)\0\0\0"
+			TITLE="Jazzy English Dictionary"
+			TARGET="$(WARPIN_DEFAULTTOOLSPATH)\Jazzy"
+			SELECT
+			<!-- BASE -->
+		>English dictionary (word list) for use with Jazzy.</PCK>
+	</HEAD>
+	<BODY>
+	<!-- page 1: introductory page -->
+	<PAGE INDEX=1 TYPE=TEXT>
+	<NEXTBUTTON TARGET=2>~Next</NEXTBUTTON>
+	<TEXT>
+		This plug-in uses the Jazzy Java API to add on-the-fly spell-checking to JamochaMUD's text input window.  To function correctly this plug-in requires the Jazzy classes (http://jazzy.sourceforge.net/) to be correctly installed (and included in your Java CLASSPATH).
+In addition you will need a word-list for your chosen language, such as the ASpell.
+
+JazzySpell requires Java 1.2 or higher to function.
+	</TEXT>
+	</PAGE>
+	<PAGE INDEX=2 TYPE=README>
+        	<NEXTBUTTON TARGET=3>~Agree</NEXTBUTTON>
+        	<TEXT>By clicking on Agree you agree to the terms of this license</TEXT>
+        	<README EXTRACTFROMPCK=1>anecho\JamochaMUD\COPYING</README>
+	</PAGE>
+
+	<PAGE INDEX=3 TYPE=CONTAINER>
+	<NEXTBUTTON TARGET=0>I~nstall</NEXTBUTTON>
+	<TEXT>
+		Select any packages you wish to install.
+	</TEXT>
+	</PAGE>
+
+	</BODY>
+</WARPIN>

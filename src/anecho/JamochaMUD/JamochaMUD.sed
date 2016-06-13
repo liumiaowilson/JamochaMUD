@@ -1,0 +1,11 @@
+{
+s/JMUDLevel/v1.0/g
+s/JMUDVersion/05-03-23/g
+s/JMUDWPIVersion/05\\03\\23/g
+s/GUIWPIVersion/04\\12\\07/g
+s/EXTRANETWPIVersion/04\\10\\29/g
+s/LEGACYWPIVersion/04\\12\\05/g
+s/PACKARCHIVEPATH/e:\\JamochaMUD-v1.0-05-03-23/g
+s/DOTVersion/05.03.23/g
+s/JMUDUnderscoreVersion/05_03_23/g
+}

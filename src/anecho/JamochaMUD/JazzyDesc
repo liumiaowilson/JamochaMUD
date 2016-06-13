@@ -1,0 +1,4 @@
+This plug-in uses the Jazzy Java API to add on-the-fly spell-checking to JamochaMUD's text input window.  To function correctly this plug-in requires the Jazzy classes (http://jazzy.sourceforge.net/) to be correctly installed (and included in your Java CLASSPATH).
+In addition you will need a word-list for your chosen language, such as the ASpell.
+
+JazzySpell requires Java 1.2 or higher to function.

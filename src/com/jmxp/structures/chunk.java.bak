@@ -1,0 +1,14 @@
+package com.jmxp.structures;
+
+public class chunk 
+{
+	public enum chunkType {
+		  chunkNone,
+		  chunkText,
+		  chunkTag,
+		  chunkError
+		};
+		
+	  public chunkType chk;
+	  public String text;
+}

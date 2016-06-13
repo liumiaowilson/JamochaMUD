@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+
+<!-- 
+    A sample installation file.
+    Use it as a base for your own installers :-)
+    
+    To compile it :
+    - go in the bin directory where you installed IzPack
+    - call "compile ../sample/install.xml -b ../sample"
+-->
+
+<installation version="1.0">
+
+    <!-- 
+        The info section.
+        The meaning of the tags should be natural ...
+    -->
+    <info>
+        <appname>JamochaMUD</appname>
+        <appversion>JMUDLevel-JMUDVersion</appversion>
+        <authors>
+            <author name="Jeff Robinson" email="jeffnik@anecho.mb.ca"/>
+        </authors>
+        <url>http://jamochamud.anecho.mb.ca</url>
+    </info>
+    
+    <!-- 
+        The gui preferences indication.
+        Sets the installer window to 640x480. It will not be able to change the size.
+    -->
+    <guiprefs width="640" height="480" resizable="no"/>
+    
+    <!-- 
+        The locale section.
+        Asks here to include the English langpack.
+    -->
+    <locale>
+        <langpack iso3="eng"/>
+    </locale>
+    
+    <!-- 
+        The resources section.
+        The ids must be these ones if you want to use the LicencePanel and/or the InfoPanel.
+    -->
+    <resources>
+	<res id="LicencePanel.licence" src="binary/anecho/JamochaMUD/COPYING"/>
+	<res id="InfoPanel.info" src="binary/anecho/JamochaMUD/Read.me"/>
+	<!-- <res id="ShortcutPanel.shortcutSpec" src="shortcutSpec.xml"/> -->
+	<res id="shortcutSpec.xml" src="shortcutSpec.xml"/>
+	<!-- <res id="TargetPanel.dir" src=""/> -->
+    </resources>
+    
+    <!-- 
+        The panels section.
+        We indicate here which panels we want to use. The order will be respected.
+    -->
+    <panels>
+	<panel classname="HelloPanel"/>
+	<panel classname="InfoPanel"/>
+	<panel classname="LicencePanel"/>
+	<panel classname="TargetPanel"/> 
+	<panel classname="PacksPanel"/>
+	<panel classname="InstallPanel"/>
+	<panel classname="ShortcutPanel"/>
+	<panel classname="FinishPanel"/>
+    </panels>
+    
+    <!-- 
+        The packs section.
+        We specify here our packs.
+    -->
+    <packs>
+	<pack name="Anecho Java GUI package" required="yes">
+		<description>The Anecho GUI package.  This package, required for JamochaMUD, contains re-usable Java classes such as the synchronised frames, resource readers (for multi-language support), position tools, and message box classes.</description>
+		<file src="binary/anecho/gui" targetdir="$INSTALL_PATH/anecho"/>
+	</pack>
+	<pack name="Anecho Extranet package" required="yes">
+		<description>The Anecho Extranet package.  This package is required for the use of JamochaMUD, but also contains re-usable classes for "non-blocking" reading of buffered output from servers, as well as a class with simple Socks support.</description>
+		<file src="binary/anecho/extranet" targetdir="$INSTALL_PATH/anecho"/>
+	</pack>
+	<pack name="JamochaMUD package" required="yes">
+		<description>JamochaMUD, an open-source Java MU* client, JMUDLevel</description>
+		<file src="binary/anecho/JamochaMUD" targetdir="$INSTALL_PATH/anecho"/>
+	</pack>
+	<pack name="BrowserLauncher package" required="yes">
+		<description>This package is required for JamochaMUD to use the Operating System's browser (for displaying links, help, etc.)</description>
+		<file src="binary/edu" targetdir="$INSTALL_PATH"/>
+	</pack>
+	<pack name="Legacy JamochaMUD support package" required="yes">
+		<description>Anecho Legacy JamochaMUD package.  This package is required for the use of JamochaMUD on systems running the 1.1.x series of Java, though will have no adverse effects if installed on a more current system.</description>
+		<file src="binary/anecho/legacy" targetdir="$INSTALL_PATH/anecho"/>
+	</pack>
+    </packs>
+    
+</installation>

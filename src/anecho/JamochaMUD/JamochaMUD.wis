@@ -1,0 +1,77 @@
+<WARPIN OS="OS2_2X">
+	<HEAD>
+	  <TITLE>JamochaMUD JMUDLevel JMUDVersion</TITLE>
+	  
+		<PCK 	INDEX=1
+			PACKAGEID="Jeff Robinson\Anecho\Anecho Java GUI package\GUIWPIVersion"
+			TITLE="GUI Package"
+			TARGET="$(WARPIN_DEFAULTAPPSPATH)"
+			SELECT
+			BASE
+		>The Anecho GUI package.  This package, required for JamochaMUD, contains re-usable Java classes such as the synchronised frames, resource readers (for multi-language support), position tools, and message box classes.</PCK>
+		<PCK 	INDEX=2
+			PACKAGEID="Jeff Robinson\Anecho\Anecho Java Extranet package\EXTRANETWPIVersion"
+			TITLE="Extranet Package"
+			TARGET="$(WARPIN_DEFAULTAPPSPATH)"
+			SELECT
+		>The Anecho Extranet package.  This package is required for the use of JamochaMUD, but also contains re-usable classes for "non-blocking" reading of buffered output from servers, as well as a class with simple Socks support.</PCK>
+		<PCK 	INDEX=3
+			REQUIRES=1
+			REQUIRES=2
+			REQUIRES=4
+			PACKAGEID="Jeff Robinson\Anecho\JamochaMUD\JMUDWPIVersion"
+			TITLE="JamochaMUD package"
+			TARGET="$(WARPIN_DEFAULTAPPSPATH)"
+			SELECT
+			<!-- EXECUTE="$(3)\anecho\JamochaMUD\os2setup.cmd warpin" -->
+			EXECUTE="$(3)\anecho\JamochaMUD\os2setup.cmd $(3)"
+		>JamochaMUD, an open-source Java MU* client, JMUDLevel
+		</PCK>
+		<PCK	INDEX=4
+			PACKAGEID="Eric Albert\edu\BrowserLauncher\1\4\0"
+			TITLE="BrowserLauncher package"
+			TARGET="$(WARPIN_DEFAULTAPPSPATH)"
+			SELECT
+		>This package is required for JamochaMUD to use the Operating System's browser (for displaying links, help, etc.)</PCK>
+               	<PCK 	INDEX=5
+			PACKAGEID="Jeff Robinson\Anecho\Anecho Legacy JamochaMUD package\LEGACYWPIVersion"
+			TITLE="Legacy JamochaMUD support package"
+			TARGET="$(WARPIN_DEFAULTAPPSPATH)"
+			SELECT
+		>Anecho Legacy JamochaMUD package.  This package is required for the use of JamochaMUD on systems running the 
+                1.1.x series of Java, though will have no adverse effects if installed on a more current system.</PCK>
+
+	</HEAD>
+	<BODY>
+	<!-- page 1: introductory page -->
+	<PAGE INDEX=1 TYPE=TEXT>
+	<NEXTBUTTON TARGET=2>~Next</NEXTBUTTON>
+	<TEXT>
+		Welcome to the JamochaMUD Warp-IN installation!
+		JamochaMUD offers unicode, plug-in, and multi-language support
+		(currently 8 different languages) to allow a more enjoyable
+		MUCKing/MUDding experience!  Featuring multi-mucking, 
+		command history, synchronized window movements, 
+		experimental Socks5 support, user defined variables and definitions,
+		and greatly improved ANSI colour support.  Plays nice on *nix 
+		systems, supports a wider range of MU*'s than before, and also 
+		includes emulation of some TinyFugue editor controls.
+		All this while still only using Java 1.1.  See the read.me for 
+		more information!
+	</TEXT>
+	</PAGE>
+	<PAGE INDEX=2 TYPE=README>
+        	<NEXTBUTTON TARGET=3>~Agree</NEXTBUTTON>
+        	<TEXT>By clicking on Agree you agree to the terms of this license</TEXT>
+        	<README EXTRACTFROMPCK=3>anecho\JamochaMUD\COPYING</README>
+	</PAGE>
+
+	<PAGE INDEX=3 TYPE=CONTAINER>
+	<NEXTBUTTON TARGET=0>I~nstall</NEXTBUTTON>
+	<TEXT>
+		Select any packages you wish to install.
+	</TEXT>
+	</PAGE>
+
+	</BODY>
+</WARPIN>

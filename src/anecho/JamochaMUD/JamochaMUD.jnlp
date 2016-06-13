@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://www.jamochamud.org/" href="JamochaMUD.jnlp">
+<information>
+  <title>JamochaMUD</title>
+  <vendor>Jeff Robinson</vendor>
+  <homepage href="http://www.jamochamud.org" />
+  <description>An open source MUD/MUCK client.</description>
+  <icon kind="splash" href="Images/JMUDSplash.gif" />
+  <icon href="Images/JamochaMUD_40x40.gif" />
+  <offline-allowed/>
+</information>
+<security>
+  <all-permissions/>
+</security>
+<resources>
+  <j2se version="1.2+" />
+  <jar href="jar/JamochaMUD.jar"/>
+</resources>
+<application-desc main-class="anecho.JamochaMUD.JMUD" />
+</jnlp>

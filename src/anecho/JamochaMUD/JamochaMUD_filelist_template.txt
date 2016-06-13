@@ -1,0 +1,96 @@
+# 
+#
+# FORMAT DESCRIPTION
+# ==================
+#
+# Archive entry:
+# --------------
+#
+# (Flags)<OriginBase>|<DestBase>|<CommonPath>[|<*.ext>,!<*.ext>,...]
+#
+#  <OriginBase> is a directory on your local machine. It can be null, absolute,
+#  or relative. It supports path-macros.
+#
+#  <DestBase> is a file or directory which will be created on the destination
+#  machine. It will be appended to the default destPath (see .vai file) or
+#  the user chosen dest directory. It can be null, but is always relative.
+#  It supports path-macros.
+#
+#  <CommonPath> is both a relative pathname on the local and the dest machines.
+#  It can be a single file or a directory (all files are included recursively).
+#  It does NOT support path-macros.
+#
+#  <*.ext>... is an optional comma-separated list of file extensions to include
+#  or to exclude from the archive. A leading '!' excludes the files.
+#  The '.' can be ommitted, for example if you want to exclude a whole subdir
+#  named "excl_dir", you can write "!*excl_dir".
+#
+#  (Flags) can be:
+#  (E) : the file is an executable file (on Windows target: this is ignored).
+#        If applied on a directory, all files are set recursively as executable.
+#  (N) : Non-recursive. By default, directories are processed recursively. This
+#        flag forces the archiver to include only this directory, not subdirs.
+#
+#   Path-macros:
+#   They are predefined macros or MS-DOS drive letters that can precede paths.
+#   They must be contained into brackets, eg. "[HOME]".
+#   Allowed macros are:
+#   HOME    : is expanded as the users home directory ("C:\" under Windows).
+#   PROGRAM : is expanded as the default location from programs
+#              ("C:\Program Files" for example under Windows,
+#               "/usr/local" under Unix)
+#   Macros can only be followed by relative pathnames.
+#   Drive letters are MS-DOS conventional drive letters, eg. "C:".
+#   Drive letters can only be followed by absolute pathnames.
+#
+#
+# Script entry: (script to be generated on the target host)
+# -------------
+#
+# {
+#   <ScriptType>
+#   <KeyWord1>=<arg1>
+#   <KeyWord2>=<arg2>
+#   ...
+# }
+#
+#  <ScriptType> can be:
+#  JavaLauncher : the script will execute a defined class with the Java VM
+#    <KeyWords> :
+#    ScriptName : (required) name of the script file generated (no extension)
+#    Class      : (required) class to execute
+#    JavaMode   : (optional) console or windows (no console window opened)
+#    JavaArgs   : (optional) flags passed to the VM (-mx, -D...)
+#    ClassPath  : (optional) classpath
+#    ClassArgs  : (optional) args passed to the excuting class
+#
+#
+# END OF FORMAT DESCRIPTION
+#
+# In our example, we want to archive all the files, but with some reorganization
+# Thus, we will not process the "example" dir recursively, so we can adjust
+# the archive as we want.
+# We don't use path-macros here because we want all files to go to the
+# same destination directory, defined in the .vai file.
+# The readme.txt, in the "dist" dir, should be moved to the main dir.
+# The license file will be the one from VAInstall, but renamed as 'COPYING'.
+# The "doc" dir should be included entirely, so we add it without flag, so it
+# is processed recursively.
+# The "old" dir should be omitted.
+# The "java" dir should be included without java source files. Thus, we
+# specify the extension to exclude: "!*.java".
+# Finally, we would like to generate 2 Java launch scripts for our "hello"
+# class. One with 2 arguments, and the "-mx64m" flag. The other one with no
+# args.
+#
+#PACKARCHIVEPATH/binary||*.class,*.properties,*.ico,*.gif,*.png,*.txt,anecho/JamochaMUD/read.me,anecho/JamochaMUD/COPYING
+#PACKARCHIVEPATH/binary||*.*
+#PACKARCHIVEPATH/binary||anecho/JamochaMUD
+PACKARCHIVEPATH/binary|||!*.zip
+
+{
+JavaLauncher
+ScriptName=JamochaMUD_withargs
+Class=JMUD
+ClassPath=$DESTPATH
+}
