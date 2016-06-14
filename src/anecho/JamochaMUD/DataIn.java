@@ -30,10 +30,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Vector;
 
 import anecho.extranet.event.TelnetEventListener;
-
+import anecho.gui.JMSwingText;
+import anecho.gui.JMText;
 import anecho.gui.SyncFrame;
 import net.sf.wraplog.AbstractLogger;
 import net.sf.wraplog.NoneLogger;
@@ -132,6 +135,12 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
     private String initialInput = null;
     
     private java.util.List<String> commandList = null;
+    
+    private String lastCommand = null;
+    
+    private java.util.List<String> cachedWords = new ArrayList<String>();
+    
+    private Set<String> allCachedWords = new HashSet<String>();
 
     private final AbstractLogger logger;
 
@@ -362,6 +371,21 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
             
             if(pos >= 0) {
                 java.util.List<String> allWords = new ArrayList<String>();
+                if(this.lastCommand != null) {
+                    if(this.cachedWords.isEmpty()) {
+                        JMSwingText textarea = connHandler.getActiveMUDSwingText();
+                        String screenText = textarea.getText();
+                        int last_pos = screenText.lastIndexOf(this.lastCommand);
+                        String new_output = screenText.substring(last_pos + this.lastCommand.length());
+                        String [] output_items = new_output.split("[^a-zA-Z]");
+                        for(String output_item : output_items) {
+                            this.cachedWords.add(output_item);
+                        }
+                        this.allCachedWords.addAll(this.cachedWords);
+                    }
+                }
+                allWords.addAll(this.allCachedWords);
+                
                 for(int i = 0; i < historyV.size(); i++) {
                     String item = (String) historyV.get(i);
                     String [] parts = item.split(" ");
@@ -1146,8 +1170,8 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
     public void jMSendText() {
 
         if (useSwing) {
-
-            jMSendText(((anecho.gui.JMSwingEntry) dataText).getText());
+            String command = ((anecho.gui.JMSwingEntry) dataText).getText();
+            jMSendText(command);
 
         } else {
 
@@ -1170,6 +1194,9 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
      * @param outGoing The text to be sent to the currently active MU*.
      */
     private void jMSendText(final String outGoing) {
+        this.lastCommand = outGoing;
+        this.cachedWords.clear();
+        
 
         final String sendStr = outGoing;
 
