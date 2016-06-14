@@ -174,6 +174,8 @@ final public class JMConfig {
 
     public static final String COMMANDS_FILE = "CommandsFile";
     
+    public static final String DICT_QUERY_URL = "DictQueryUrl";
+    
     /**
      * Our constructor is empty, and we like it that way! Well, actually, all
      * our variables should have some base value straight &quot;out of the box".

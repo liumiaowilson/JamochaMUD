@@ -298,6 +298,10 @@ public class JMParseRC {
                 if (tmpString.equalsIgnoreCase('[' + JMConfig.COMMANDS_FILE + ']')) {
                     JMConfig.getInstance().setJMValue(JMConfig.COMMANDS_FILE, fileLines[i+1].trim());
                 }
+                
+                if (tmpString.equalsIgnoreCase('[' + JMConfig.DICT_QUERY_URL + ']')) {
+                    JMConfig.getInstance().setJMValue(JMConfig.DICT_QUERY_URL, fileLines[i+1].trim());
+                }
 
 //                if (tmpString.startsWith('[' + JMConfig.CUSTOMPALETTE)) {
 //                    logger.debug("JMParseRC: checking custom palette: " + tmpString);

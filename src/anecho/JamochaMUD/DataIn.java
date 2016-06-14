@@ -22,6 +22,7 @@
 package anecho.JamochaMUD;
 
 import anecho.JamochaMUD.TinyFugue.JMTFKeys;
+import anecho.JamochaMUD.plugins.DictPlugin;
 import anecho.extranet.event.TelnetEvent;
 import java.awt.*;
 import java.awt.event.*;
@@ -191,6 +192,8 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
                 e.printStackTrace();
             }
         }
+        
+        commandList.add(DictPlugin.COMMAND);
 
         // tfCommand = new JMTFCommands();
         // final JMTFCommands tfCommand = JMTFCommands.getInstance();

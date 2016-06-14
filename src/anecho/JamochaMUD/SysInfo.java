@@ -118,5 +118,7 @@ public class SysInfo {
         settings.setJMValue(JMConfig.USERPLUGINDIR, userPlugInDir);
 
         settings.setJMValue(JMConfig.COMMANDS_FILE, "~/CoffeeMUD/access_words.txt");
+        
+        settings.setJMValue(JMConfig.DICT_QUERY_URL, "open http://www.dictionary.com/browse/${query}");
     }
 }
