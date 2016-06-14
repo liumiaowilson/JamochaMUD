@@ -392,14 +392,15 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
                 for(int i = 0; i < historyV.size(); i++) {
                     String item = (String) historyV.get(i);
                     String [] parts = item.split(" ");
-                    if(parts.length > 1) {
-                        for(int j = 1; j < parts.length; j++) {
-                            if(!allWords.contains(parts[j])) {
-                                allWords.add(parts[j]);
-                            }
+                    for(int j = 0; j < parts.length; j++) {
+                        if(!allWords.contains(parts[j])) {
+                            allWords.add(parts[j]);
                         }
                     }
                 }
+                
+                allWords.addAll(commandList);
+                
                 for(int i = 0; i < allWords.size(); i++) {
                     String item = (String) allWords.get(i);
                     if(item.startsWith(suffix)) {
@@ -482,6 +483,9 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
             initialInput = null;
             lastProposal = 0;
         }
+        
+        //carry shift-down event to without shift
+        shiftEvent(event);
 
         if (event.isShiftDown()) {
 
