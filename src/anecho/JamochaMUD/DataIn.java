@@ -21,6 +21,7 @@
  */
 package anecho.JamochaMUD;
 
+import anecho.JamochaMUD.PrefPanels.CustomColours.CustomColour;
 import anecho.JamochaMUD.TinyFugue.JMTFKeys;
 import anecho.JamochaMUD.plugins.DictPlugin;
 import anecho.extranet.event.TelnetEvent;
@@ -142,6 +143,8 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
     private java.util.List<String> cachedWords = new ArrayList<String>();
     
     private Set<String> allCachedWords = new HashSet<String>();
+    
+    private boolean configLoaded = false;
 
     private final AbstractLogger logger;
 
@@ -1205,6 +1208,13 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
         this.lastCommand = outGoing;
         this.cachedWords.clear();
         
+        if(!this.configLoaded) {
+            CustomColour cc = new CustomColour();
+            cc.loadPanel();
+            cc.applySettings();
+            
+            this.configLoaded = true;
+        }
 
         final String sendStr = outGoing;
 
