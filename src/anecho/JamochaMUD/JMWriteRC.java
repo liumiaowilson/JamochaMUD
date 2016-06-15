@@ -973,6 +973,8 @@ public class JMWriteRC {
         jMWriteEntry(JMConfig.COMMANDS_FILE, settings.getJMString(JMConfig.COMMANDS_FILE));
         
         jMWriteEntry(JMConfig.DICT_QUERY_URL, settings.getJMString(JMConfig.DICT_QUERY_URL));
+        
+        jMWriteEntry(JMConfig.PROMPT_STR, settings.getJMString(JMConfig.PROMPT_STR));
 
         // Now some user defined variables and definitions
         jMWriteVariables();

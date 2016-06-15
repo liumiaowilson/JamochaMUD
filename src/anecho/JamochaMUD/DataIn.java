@@ -378,8 +378,9 @@ public class DataIn extends SyncFrame implements ActionListener, KeyListener, Mo
                     if(this.cachedWords.isEmpty()) {
                         JMSwingText textarea = connHandler.getActiveMUDSwingText();
                         String screenText = textarea.getText();
-                        int last_pos = screenText.lastIndexOf(this.lastCommand);
-                        String new_output = screenText.substring(last_pos + this.lastCommand.length());
+                        String promptStr = this.settings.getJMString(JMConfig.PROMPT_STR);
+                        int last_pos = screenText.lastIndexOf(promptStr + this.lastCommand);
+                        String new_output = screenText.substring(last_pos + this.lastCommand.length() + promptStr.length());
                         String [] output_items = new_output.split("[^a-zA-Z]");
                         for(String output_item : output_items) {
                             this.cachedWords.add(output_item);
